@@ -1,9 +1,10 @@
-import { Table } from "@heroui/react";
+import { Button, Table } from "@heroui/react";
+import Link from "next/link";
 
 const UsersTable = ({ users }) => {
-    console.log(users);
+    // console.log(users);
 
-    const {name, email, role} = users;
+    // const { name, email, role } = users;
 
     return (
         <div>
@@ -12,19 +13,29 @@ const UsersTable = ({ users }) => {
                     <Table.Content aria-label="Team members" className="min-w-150">
                         <Table.Header>
                             <Table.Column isRowHeader>Name</Table.Column>
-                            <Table.Column>Role</Table.Column>
-                            <Table.Column>Status</Table.Column>
                             <Table.Column>Email</Table.Column>
+                            <Table.Column>Role</Table.Column>
+                            <Table.Column>Actions</Table.Column>
                         </Table.Header>
                         <Table.Body>
                             {
                                 users.map(user => (
                                     <Table.Row key={user._id}>
-                                <Table.Cell>{user.name}</Table.Cell>
-                                <Table.Cell>{user.role}</Table.Cell>
-                                <Table.Cell>Active</Table.Cell>
-                                <Table.Cell>{user.email}</Table.Cell>
-                            </Table.Row>
+                                        <Table.Cell>{user.name}</Table.Cell>
+                                        <Table.Cell>{user.email}</Table.Cell>
+                                        <Table.Cell>{user.role}</Table.Cell>
+                                        <Table.Cell className={'space-x-2'}>
+                                            <Link href={`/users/${user._id}`}>
+                                                <Button variant="outline">Details</Button>
+                                            </Link>
+                                            <Link href={`/users/${user._id}/edit`}>
+                                                <Button variant="outline">Edit</Button>
+                                            </Link>
+                                            <Link href={`/users/${user._id}`}>
+                                                <Button variant="danger">Delete</Button>
+                                            </Link>
+                                        </Table.Cell>
+                                    </Table.Row>
                                 ))
                             }
                         </Table.Body>
