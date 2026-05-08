@@ -1,6 +1,6 @@
 import AddUserModal from "../components/AddUserModal";
 import UsersTable from "../components/UsersTable";
-import { deleteUser } from "../lib/actions";
+import { createUser, deleteUser } from "../lib/actions";
 import { getUsers } from "../lib/data";
 
 const UsersPage = async () => {
@@ -12,7 +12,7 @@ const UsersPage = async () => {
         <div>
             <div className="flex justify-between items-center">
                 <h2>Users : {users.length}</h2>
-                <AddUserModal />
+                <AddUserModal createUserAction = {createUser} />
             </div>
             <div>
                 <UsersTable users={users} deleteUserAction={deleteUser} />

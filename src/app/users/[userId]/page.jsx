@@ -3,7 +3,7 @@ import { getUserById } from "@/app/lib/data";
 const UserDetailPage = async ({ params }) => {
     const { userId } = await params;
     const user = await getUserById(userId);
-    console.log(user);
+    // console.log(user);
 
     return (
         <div>
