@@ -1,10 +1,16 @@
-import { Button, Table } from "@heroui/react";
+"use client"
+
+import { AlertDialog, Button, Table } from "@heroui/react";
 import Link from "next/link";
 
-const UsersTable = ({ users }) => {
+const UsersTable = ({ users, deleteUserAction }) => {
     // console.log(users);
 
     // const { name, email, role } = users;
+
+    const handleDelete = async(userId) => {
+        await deleteUserAction(userId);
+    };
 
     return (
         <div>
@@ -31,9 +37,38 @@ const UsersTable = ({ users }) => {
                                             <Link href={`/users/${user._id}/edit`}>
                                                 <Button variant="outline">Edit</Button>
                                             </Link>
-                                            <Link href={`/users/${user._id}`}>
+                                            {/* <Link href={`/users/${user._id}`}>
                                                 <Button variant="danger">Delete</Button>
-                                            </Link>
+                                            </Link> */}
+
+                                            <AlertDialog>
+                                                <Button variant="danger">Delete</Button>
+                                                <AlertDialog.Backdrop>
+                                                    <AlertDialog.Container>
+                                                        <AlertDialog.Dialog className="sm:max-w-100">
+                                                            <AlertDialog.CloseTrigger />
+                                                            <AlertDialog.Header>
+                                                                <AlertDialog.Icon status="danger" />
+                                                                <AlertDialog.Heading>Delete user permanently?</AlertDialog.Heading>
+                                                            </AlertDialog.Header>
+                                                            <AlertDialog.Body>
+                                                                <p>
+                                                                    This will permanently delete <strong>My Awesome Project</strong> and all of its
+                                                                    data. This action cannot be undone.
+                                                                </p>
+                                                            </AlertDialog.Body>
+                                                            <AlertDialog.Footer>
+                                                                <Button slot="close" variant="tertiary">
+                                                                    Cancel
+                                                                </Button>
+                                                                <Button onClick={() => handleDelete(user._id)} slot="close" variant="danger">
+                                                                    Confirm delete
+                                                                </Button>
+                                                            </AlertDialog.Footer>
+                                                        </AlertDialog.Dialog>
+                                                    </AlertDialog.Container>
+                                                </AlertDialog.Backdrop>
+                                            </AlertDialog>
                                         </Table.Cell>
                                     </Table.Row>
                                 ))
