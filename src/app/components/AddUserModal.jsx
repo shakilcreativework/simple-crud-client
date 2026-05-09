@@ -24,7 +24,7 @@ const AddUserModal = ({ createUserAction }) => {
                                             <Label>Email</Label>
                                             <Input placeholder="Enter your email" />
                                         </TextField>
-                                        <TextField className="w-full" name="role" type="tel">
+                                        <TextField className="w-full" name="role" type="text">
                                             <Label>Role</Label>
                                             <Input placeholder="Enter user role" />
                                         </TextField>
